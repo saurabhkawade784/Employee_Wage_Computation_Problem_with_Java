@@ -1,10 +1,10 @@
 package employeewagecomputationprob;
 //program to calculate employee wage.
 public class EmployeeWageComputation {
-	static final int PRESENT=1,WAGE_PER_HOUR=20,FULL_TIME=1,PART_TIME=0;
+	static final int PRESENT=1,WAGE_PER_HOUR=20,FULL_TIME=1,PART_TIME=0,WORKING_DAYS_IN_MONTH=20;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int Worked_Hrs=0, Day_Salary_Of_Employee=0;
+		int Worked_Hrs=0, Day_Salary_Of_Employee=0,Month_Salary_Of_Employee=0;
 		System.out.println("Wecome to employee wage program");
   		//int Random_No=(int) (Math.floor(Math.random()*10)%2);
   		//checking employee is present or absent
@@ -26,6 +26,10 @@ public class EmployeeWageComputation {
   		//computing employee wage for one day
   		Day_Salary_Of_Employee=WAGE_PER_HOUR*Worked_Hrs;
   		System.out.println("Your one day salary creadited to your account, rupees " +Day_Salary_Of_Employee);
+  		//computing employee wage for month
+  		Month_Salary_Of_Employee=WORKING_DAYS_IN_MONTH*Day_Salary_Of_Employee;
+  		System.out.println("Your one day salary creadited to your account, rupees " +Month_Salary_Of_Employee);
+	
 	}
 
 }
