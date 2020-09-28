@@ -6,24 +6,23 @@ public class EmployeeWageComputation {
 		// TODO Auto-generated method stub
 		int Worked_Hrs=0, Day_Salary_Of_Employee=0;
 		System.out.println("Wecome to employee wage program");
-  		int Random_No=(int) (Math.floor(Math.random()*10)%2);
+  		//int Random_No=(int) (Math.floor(Math.random()*10)%2);
   		//checking employee is present or absent
-  		if(PRESENT==Random_No)
+		int Job_Type=(int) (Math.floor(Math.random()*10)%3);
+  		switch(Job_Type)
   		{
-  	  		int Job_Type=(int) (Math.floor(Math.random()*10)%2);
-  	  		if(FULL_TIME==Job_Type)
-  	  		{
+  			case FULL_TIME:  				
   	  			System.out.println("Employee is present full time.");
   	  			Worked_Hrs=8;
-  	  		}
-  	  		else
-  	  		{
+  	  			break;
+  			case PART_TIME:  			  		
   	  			System.out.println("Employee is present part time.");
 	  			Worked_Hrs=4;
-  	  		}	
-  		}
-  	  	else
-  			System.out.println("Employee is absent.");
+	  			break;
+  	  		default:
+  	  			System.out.println("Employee is absent.");
+  		}	
+  			 
   		//computing employee wage for one day
   		Day_Salary_Of_Employee=WAGE_PER_HOUR*Worked_Hrs;
   		System.out.println("Your one day salary creadited to your account, rupees " +Day_Salary_Of_Employee);
