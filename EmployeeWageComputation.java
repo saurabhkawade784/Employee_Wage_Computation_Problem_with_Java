@@ -1,8 +1,8 @@
 package employeewagecomputationprob;
 //program to calculate employee wage.
 public class EmployeeWageComputation {
-	static final int PRESENT=1,WAGE_PER_HOUR=20,FULL_TIME=1,PART_TIME=0,WORKING_DAYS_IN_MONTH=20,MAX_WORKING_HRS=100;
-	public static void main(String[] args) {
+	public static final int PRESENT=1,WAGE_PER_HOUR=20,FULL_TIME=1,PART_TIME=0,WORKING_DAYS_IN_MONTH=20,MAX_WORKING_HRS=100;
+	public static int computeEmpWage(){
 		// TODO Auto-generated method stub
 		
 		int Worked_Hrs=0, Day_Salary_Of_Employee=0,Month_Salary_Of_Employee=0;
@@ -47,7 +47,14 @@ public class EmployeeWageComputation {
   		//computing employee wage for month
   		Month_Salary_Of_Employee=WORKING_DAYS_IN_MONTH*Day_Salary_Of_Employee;
   		System.out.println("Your one day salary creadited to your account, rupees " +Month_Salary_Of_Employee);
+		return Total_Salary_Of_Employee;
 	
 	}
 
+
+public static void main(String[] args) {
+	
+	computeEmpWage();
+	
+}
 }
