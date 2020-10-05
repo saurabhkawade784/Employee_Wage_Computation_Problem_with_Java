@@ -1,78 +1,86 @@
 package employeewagecomputationprob;
+//program to show ability to save Total Wage for each company.
+import java.util.ArrayList;
 import java.util.Scanner;
-//program to calculate employee wage.
-public class EmployeeWageComputation {
-	public static int No_Of_Companies;
-	public static String Company_Name;
-	public static final int PRESENT=1,FULL_TIME=1,PART_TIME=0;
-	public static int WAGE_PER_HOUR=0;
-	public static int WORKING_DAYS_IN_MONTH=0;
-	public static int MAX_WORKING_HRS=0;
-	public static int computeEmpWage(String Company_Name,int WAGE_PER_HOUR,int WORKING_DAYS_IN_MONTH,int MAX_WORKING_HRS){
-		// TODO Auto-generated method stub
-		
-		int Worked_Hrs=0, Day_Salary_Of_Employee=0,Month_Salary_Of_Employee=0;
-		int Emp_Worked_hrs=0,i,Salary,Total_Salary_Of_Employee=0;
-		System.out.println("Wecome to employee wage program");
-  		//int Random_No=(int) (Math.floor(Math.random()*10)%2);
-  		//checking employee is present or absent
-	for(i=1;i<=WORKING_DAYS_IN_MONTH && Emp_Worked_hrs<= MAX_WORKING_HRS;i++)
+
+public class EmployeeWageComputation
+{
+	public static final int FULL_TIME=1,PART_TIME=2;
+	public static int COMPANY_COUNT=0;
+	private final int TOTAL_EMPLOYEE_WAGE,WAGE_PER_HRS,WORKING_DAYS_IN_MONTH,MAX_WORKING_HRS;
+	public String COMPANY_NAME;
+//Function to check employee present or absent or full_time or Part_time.
+	static int checkEmployeeAttendance()
 	{
-		int Job_Type=(int) (Math.floor(Math.random()*10)%3);
-  		switch(Job_Type)
-  		{
-  			case FULL_TIME:  				
-  	  			System.out.println("Employee is present full time.");
-  	  			Worked_Hrs=8;
-  	  			break;
-  			case PART_TIME:  			  		
-  	  			System.out.println("Employee is present part time.");
-	  			Worked_Hrs=4;
-	  			break;
-  	  		default:
-  	  			System.out.println("Employee is absent.");
-  		}	
-  		
-  		if(Emp_Worked_hrs==96||Emp_Worked_hrs==94)
-  		{
-  			if(Worked_Hrs==8)
-  				break;
-  		}
-  		else if(Emp_Worked_hrs==98)
-  		{
-  			break;
-  		}
-  		Emp_Worked_hrs+=Worked_Hrs;
-  		Salary=WAGE_PER_HOUR*Worked_Hrs;
-  		Total_Salary_Of_Employee+=Salary;
-  	}	
-		System.out.println(Company_Name+ " Total salary of employee for 100hrs and 20days, rupees " +Total_Salary_Of_Employee);
-  		//computing employee wage for one day
-  		Day_Salary_Of_Employee=WAGE_PER_HOUR*Worked_Hrs;
-  		System.out.println("Your one day salary creadited to your account, rupees " +Day_Salary_Of_Employee);
-  		//computing employee wage for month
-  		Month_Salary_Of_Employee=WORKING_DAYS_IN_MONTH*Day_Salary_Of_Employee;
-  		System.out.println("Your one day salary creadited to your account, rupees " +Month_Salary_Of_Employee);
-		return Total_Salary_Of_Employee;
-	
+		int Present_Or_Absent=(int)Math.floor(Math.random()*10)%3;
+		//returns value of above arithmetic computation
+		return Present_Or_Absent;
 	}
+//use static function to check employee working hours
+	static int getWorkingHrs(int Present_Or_Absent)
+	{
+		int Worked_Hrs;
+		switch(Present_Or_Absent)
+		{
+				case FULL_TIME:
+					Worked_Hrs=8;
+					break;
+				case PART_TIME:
+					Worked_Hrs=8;
+					break;
+				default:
+					Worked_Hrs=0;
+		}
+		//returns value
+
+		return Worked_Hrs;
+	}
+//Function for calculating total employee wage
+	public int CalculateEmployeeWage()
+	{
+		int Worked_Hrs=0,salary,Total_Employee_Salary=0,totalWorkingHrs=0,day;
+		for(day=1;day<=this.WORKING_DAYS_IN_MONTH && totalWorkingHrs<=this.MAX_WORKING_HRS;day++)
+		{
+
+			Worked_Hrs=getWorkingHrs(checkEmployeeAttendance());
+
+			if(totalWorkingHrs==96||totalWorkingHrs==94)
+			{
+				if (Worked_Hrs==8)
+				break;
+			}
+			else if(totalWorkingHrs==98)
+			{
+				break;
+			}
+			totalWorkingHrs+=Worked_Hrs;
+			salary=this.WAGE_PER_HRS*Worked_Hrs;
+			Total_Employee_Salary+=salary;
+		}
+		COMPANY_COUNT++;
+		return Total_Employee_Salary;
 
 
-public static void main(String[] args) {
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter number of companies");
-	No_Of_Companies=sc.nextInt();
-	for(int i=0;i<=No_Of_Companies;i++) {
-	System.out.println("Enter no of company name: ");
-	Company_Name=sc.next();
-	System.out.println("Enter employee wage: ");
-	WAGE_PER_HOUR=sc.nextInt();
-	System.out.println("Enter total working days: ");
-	WORKING_DAYS_IN_MONTH=sc.nextInt();
-	System.out.println("Enter total working hours: ");
-	MAX_WORKING_HRS=sc.nextInt();
-	computeEmpWage(Company_Name,WAGE_PER_HOUR,WORKING_DAYS_IN_MONTH,MAX_WORKING_HRS);
-	
 	}
-}
+
+	public EmployeeWageComputation(String Company,int WagePerHr,int Month,int MaxWorkingHrs)
+	{
+		this.COMPANY_NAME=Company;
+		this.WAGE_PER_HRS=WagePerHr;
+		this.WORKING_DAYS_IN_MONTH=Month;
+		this.MAX_WORKING_HRS=MaxWorkingHrs;
+		this.TOTAL_EMPLOYEE_WAGE=CalculateEmployeeWage();
+		this.show();
+	}
+
+	public void show()
+	{
+		System.out.println("Company Name : "+this.COMPANY_NAME+", Total Wage :"+this.TOTAL_EMPLOYEE_WAGE);
+	}
+
+	public static void main(String[] args)
+	{
+		EmployeeWageComputation EWc1=new EmployeeWageComputation("DataMetica",30,15,120);
+		EmployeeWageComputation EWc2=new EmployeeWageComputation("CloudEra",30,15,120);
+	}
 }
