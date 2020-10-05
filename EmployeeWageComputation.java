@@ -1,7 +1,13 @@
 package employeewagecomputationprob;
+interface IEmpWageComputation
+{
+	public void addCompanyEmpWage(String Company,int WagePerHr,int Month,int MaxWorkingHrs);
+	public void CalculateWage();
+}
+
 //program for manging employee for multiple companies
 //class for salary computation
-public class EmployeeWageComputation
+public class EmployeeWageComputation implements IEmpWageComputation
 {
 	public static final int FULL_TIME=1,PART_TIME=2;
 
@@ -33,6 +39,7 @@ public class EmployeeWageComputation
 		return workingHrs;
 	}
 //Show Company employee wage information into array
+@Override
 	public void CalculateWage()
 	{
 		for(int i=0;i<COMPANY_COUNT;i++)
@@ -74,7 +81,8 @@ public class EmployeeWageComputation
 		CompanyEmpWageArray=new CompanyEmpWage[5];
 	}
 //Store information about company into array.
-	private void addCompanyEmpWage(String Company,int WagePerHr,int Month,int MaxWorkingHrs)
+	@Override
+	public void addCompanyEmpWage(String Company,int WagePerHr,int Month,int MaxWorkingHrs)
 	{
 		CompanyEmpWageArray[COMPANY_COUNT]=new CompanyEmpWage(Company,WagePerHr,Month,MaxWorkingHrs);
 		COMPANY_COUNT++;
@@ -83,7 +91,7 @@ public class EmployeeWageComputation
 	public static void main(String[] args)
 	{
 		EmployeeWageComputation  EW=new EmployeeWageComputation();
-		EW.addCompanyEmpWage("DATAMETICA",20,30,100);
+		EW.addCompanyEmpWage("DATAMETICA",10,20,300);
 		EW.addCompanyEmpWage("CLOUDERA",30,15,120);
 		EW.CalculateWage();
 
