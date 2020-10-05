@@ -1,4 +1,7 @@
 package employeewagecomputationprob;
+//Refactor to have list of multiple companies to manage Employee.
+import java.util.*;
+//Use of Interface
 interface IEmpWageComputation
 {
 	public void addCompanyEmpWage(String Company,int WagePerHr,int Month,int MaxWorkingHrs);
@@ -12,7 +15,7 @@ public class EmployeeWageComputation implements IEmpWageComputation
 	public static final int FULL_TIME=1,PART_TIME=2;
 
 	private static int COMPANY_COUNT=0;
-	private CompanyEmpWage[] CompanyEmpWageArray;
+	ArrayList<CompanyEmpWage>CompanyEmpWageList;
 
 //Function for getting information about employee present or absent 
 	static int Attendance_Of_Employee()
@@ -42,10 +45,10 @@ public class EmployeeWageComputation implements IEmpWageComputation
 @Override
 	public void CalculateWage()
 	{
-		for(int i=0;i<COMPANY_COUNT;i++)
+		for(CompanyEmpWage list:CompanyEmpWageList)
 		{
-			CompanyEmpWageArray[i].setTotalWage(CalculateWage(CompanyEmpWageArray[i]));
-                        CompanyEmpWageArray[i].show();
+			list.setTotalWage(CalculateWage(list));
+			list.show();
 		}
 	}
 //Function for calculating Employee wage depending on how much hour employee actually work
@@ -78,20 +81,21 @@ public class EmployeeWageComputation implements IEmpWageComputation
 //ArrayObject
 	public EmployeeWageComputation()
 	{
-		CompanyEmpWageArray=new CompanyEmpWage[5];
+	CompanyEmpWageList=new ArrayList<>();
+	
 	}
 //Store information about company into array.
 	@Override
 	public void addCompanyEmpWage(String Company,int WagePerHr,int Month,int MaxWorkingHrs)
 	{
-		CompanyEmpWageArray[COMPANY_COUNT]=new CompanyEmpWage(Company,WagePerHr,Month,MaxWorkingHrs);
-		COMPANY_COUNT++;
+		CompanyEmpWageList.add(new CompanyEmpWage(Company,WagePerHr,Month,MaxWorkingHrs));
+		
 	}
 //main function
 	public static void main(String[] args)
 	{
 		EmployeeWageComputation  EW=new EmployeeWageComputation();
-		EW.addCompanyEmpWage("DATAMETICA",10,20,300);
+		EW.addCompanyEmpWage("DATAMETICA",30,15,120);
 		EW.addCompanyEmpWage("CLOUDERA",30,15,120);
 		EW.CalculateWage();
 
