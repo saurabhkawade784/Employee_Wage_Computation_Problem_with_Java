@@ -1,5 +1,5 @@
 package employeewagecomputationprob;
-//Refactor to have list of multiple companies to manage Employee.
+//Program to store Dailywage with Total Wage
 import java.util.*;
 //Use of Interface
 interface IEmpWageComputation
@@ -15,7 +15,10 @@ public class EmployeeWageComputation implements IEmpWageComputation
 	public static final int FULL_TIME=1,PART_TIME=2;
 
 	private static int COMPANY_COUNT=0;
+	//Array declaration
 	ArrayList<CompanyEmpWage>CompanyEmpWageList;
+	ArrayList DailyEmployeeWageList;
+
 
 //Function for getting information about employee present or absent 
 	static int Attendance_Of_Employee()
@@ -49,6 +52,8 @@ public class EmployeeWageComputation implements IEmpWageComputation
 		{
 			list.setTotalWage(CalculateWage(list));
 			list.show();
+			System.out.println("The Daily Wage of employee List is :\n"+DailyEmployeeWageList+"\n");
+
 		}
 	}
 //Function for calculating Employee wage depending on how much hour employee actually work
@@ -72,6 +77,7 @@ public class EmployeeWageComputation implements IEmpWageComputation
 			totalWorkingHrs+=workingHrs;
 			salary=CompanyEmpWage.WAGE_PER_HRS*workingHrs;
 			totalSalary+=salary;
+			DailyEmployeeWageList.add(salary);
 		}
 
 		return totalSalary;
@@ -82,12 +88,15 @@ public class EmployeeWageComputation implements IEmpWageComputation
 	public EmployeeWageComputation()
 	{
 	CompanyEmpWageList=new ArrayList<>();
+	DailyEmployeeWageList=new ArrayList<>();
+
 	
 	}
 //Store information about company into array.
 	@Override
 	public void addCompanyEmpWage(String Company,int WagePerHr,int Month,int MaxWorkingHrs)
 	{
+		//ArrayList object creation
 		CompanyEmpWageList.add(new CompanyEmpWage(Company,WagePerHr,Month,MaxWorkingHrs));
 		
 	}
